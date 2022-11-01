@@ -2,15 +2,6 @@ version: '2.4'
 
 x-app:
   &app
-  build:
-    context: .
-    dockerfile: ./Dockerfile.development
-    args:
-      RUBY_VERSION: '2.7.5'
-      PG_MAJOR: '14'
-      NODE_MAJOR: '16'
-      YARN_VERSION: '1.13.0'
-      BUNDLER_VERSION: '2.3.15'
   environment:
     &env
     NODE_ENV: development
@@ -76,6 +67,16 @@ services:
       - rpc
 
   rails:
+    image: chaskiq/chaskiq:1.1.0
+    build:
+      context: .
+      dockerfile: ./Dockerfile.development
+      args:
+        RUBY_VERSION: '2.7.5'
+        PG_MAJOR: '14'
+        NODE_MAJOR: '16'
+        YARN_VERSION: '1.13.0'
+        BUNDLER_VERSION: '2.3.15'
     <<: *backend
     command: ./bin/dev
     ports:

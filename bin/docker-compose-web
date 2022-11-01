@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ "$DEPLOYMENT_MIGRATE" == "true" ]; then
+  ANYCABLE_REDIS_URL=$REDIS_URL REDIS=$REDIS_URL bundle exec rails db:setup
+  ANYCABLE_REDIS_URL=$REDIS_URL REDIS=$REDIS_URL bundle exec rails server -p $PORT -b 0.0.0.0
+else
+  ANYCABLE_REDIS_URL=$REDIS_URL REDIS=$REDIS_URL bundle exec rails server -p $PORT -b 0.0.0.0
+fi

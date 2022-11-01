@@ -59,6 +59,7 @@ WORKDIR /usr/src/app
 
 # Copy app source into container
 COPY --chown=docker:docker . /usr/src/app/
+RUN chmod +x /usr/src/app/bin/*
 
 # Precompile assets - production only
 # Clean up temp files and Yarn cache folder
