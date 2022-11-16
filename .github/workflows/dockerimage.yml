@@ -34,14 +34,14 @@ jobs:
                --build-arg NODE_MAJOR=16 \
                --build-arg YARN_VERSION=1.13.0 \
                --build-arg BUNDLER_VERSION=2.3.15 \
-               -t $GITHUB_REPOSITORY \
+               -t cience/go-chat \
                .
 
       - name: Tag and Push Docker image
         if: github.event_name == 'push'
         run: |
-          docker tag $GITHUB_REPOSITORY $GITHUB_REPOSITORY:$SHORT_SHA
-          docker push $GITHUB_REPOSITORY:$SHORT_SHA
+          docker tag cience/go-chat cience/go-chat:$SHORT_SHA
+          docker push cience/go-chat:$SHORT_SHA
           echo "SHORT_SHA: ${SHORT_SHA}"
         env:
           SHORT_SHA: ${{ steps.vars.outputs.short_sha }}
@@ -49,13 +49,13 @@ jobs:
       - name: Tag LATEST and Push Docker image
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: |
-          docker tag $GITHUB_REPOSITORY $GITHUB_REPOSITORY:latest
-          docker push $GITHUB_REPOSITORY:latest
+          docker tag cience/go-chat cience/go-chat:latest
+          docker push cience/go-chat:latest
           echo "LATEST deployed!"
 
       - name: Tag RELEASE and Push Docker image
         if: github.event_name	== 'release'
         run: |
-          docker tag $GITHUB_REPOSITORY $GITHUB_REPOSITORY:${{ github.ref_name }}
-          docker push $GITHUB_REPOSITORY:${{ github.ref_name }}
+          docker tag cience/go-chat cience/go-chat:${{ github.ref_name }}
+          docker push cience/go-chat:${{ github.ref_name }}
           echo "${{ github.ref_name }} deployed!"
