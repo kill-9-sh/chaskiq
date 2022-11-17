@@ -41,6 +41,7 @@ jobs:
       - name: Tag and Push Docker image
         if: github.event_name == 'push'
         run: |
+          docker login --username=${{ secrets.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }} index.docker.io
           docker tag cience/go-chat cience/go-chat:$SHORT_SHA
           docker push cience/go-chat:$SHORT_SHA
           echo "SHORT_SHA: ${SHORT_SHA}"
