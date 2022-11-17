@@ -53,6 +53,13 @@ jobs:
           docker push cience/go-chat:latest
           echo "LATEST deployed!"
 
+      - name: Tag AWS-PROD-IMG and Push Docker image
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: |
+          docker tag cience/go-chat cience/go-chat:aws-prod-img
+          docker push cience/go-chat:aws-prod-img
+          echo "AWS-PROD-IMG deployed!"
+
       - name: Tag RELEASE and Push Docker image
         if: github.event_name	== 'release'
         run: |
