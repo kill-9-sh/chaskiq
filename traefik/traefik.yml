@@ -1,4 +1,0 @@
-tls:
-  certificates:
-    - certFile: /certs/eteam-io.crt
-      keyFile: /certs/eteam-io.key

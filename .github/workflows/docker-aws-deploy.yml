@@ -1,0 +1,30 @@
+name: Push Docker Image
+
+on:
+  push:
+    branches:
+      - master
+      - stage
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Secrets to file
+        run: |
+          mkdir ./aws-prod/certs
+          echo ${{ secrets.CRT_CRT }} | base64 -d > ./aws-prod/certs/crt.crt
+          echo ${{ secrets.CRT_KEY }} | base64 -d > ./aws-prod/certs/key.key
+          echo ${{ secrets.ENV_FILE }} | base64 -d > ./aws-prod/.env
+          echo ${{ secrets.SSH_PRIVATE_KEY }} > ./ip_rsa_aws
+      - name: Copy file to AWS
+        uses: garygrossgarten/github-action-scp@release
+        with:
+          local: ./aws-prod/
+          remote: /opt/chaskiq-docker/
+          privateKey: ./ip_rsa_aws
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+    
