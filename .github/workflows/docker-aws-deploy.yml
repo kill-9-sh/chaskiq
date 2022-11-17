@@ -15,15 +15,15 @@ jobs:
       - name: Secrets to file
         run: |
           ls -la
-          mkdir aws-prod/certs
-          echo ${{ secrets.CRT_CRT }} | base64 -d > aws-prod/certs/crt.crt
-          echo ${{ secrets.CRT_KEY }} | base64 -d > aws-prod/certs/key.key
-          echo ${{ secrets.ENV_FILE }} | base64 -d > aws-prod/.env
+          mkdir $GITHUB_WORKSPACE/aws-prod/certs
+          echo ${{ secrets.CRT_CRT }} | base64 -d > $GITHUB_WORKSPACE/aws-prod/certs/crt.crt
+          echo ${{ secrets.CRT_KEY }} | base64 -d > $GITHUB_WORKSPACE/aws-prod/certs/key.key
+          echo ${{ secrets.ENV_FILE }} | base64 -d > $GITHUB_WORKSPACE/aws-prod/.env
           echo ${{ secrets.SSH_PRIVATE_KEY }} > ./ip_rsa_aws
       - name: Copy file to AWS
         uses: garygrossgarten/github-action-scp@release
         with:
-          local: aws-prod/
+          local: $GITHUB_WORKSPACE/aws-prod/
           remote: /opt/chaskiq-docker/
           privateKey: ./ip_rsa_aws
           host: ${{ secrets.SSH_HOST }}
