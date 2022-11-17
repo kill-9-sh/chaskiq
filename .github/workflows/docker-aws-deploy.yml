@@ -14,7 +14,8 @@ jobs:
     steps:
       - name: Secrets to file
         run: |
-          ls -la
+          pwd
+          find .
           mkdir $GITHUB_WORKSPACE/aws-prod/certs
           echo ${{ secrets.CRT_CRT }} | base64 -d > $GITHUB_WORKSPACE/aws-prod/certs/crt.crt
           echo ${{ secrets.CRT_KEY }} | base64 -d > $GITHUB_WORKSPACE/aws-prod/certs/key.key
