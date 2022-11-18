@@ -20,12 +20,13 @@ jobs:
           echo ${{ secrets.CRT_KEY }} | base64 -d > ./aws-prod/certs/key.key
           echo ${{ secrets.ENV_FILE }} | base64 -d > ./aws-prod/.env
           echo ${{ secrets.SSH_PRIVATE_KEY }} > ./ip_rsa_aws
+          
       - name: Copy file to AWS
         uses: garygrossgarten/github-action-scp@release
         with:
           local: ./aws-prod/
           remote: /opt/chaskiq-docker/
-          privateKey: ./ip_rsa_aws
+          privateKey: ${{ secrets.SSH2_KEY }}
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
     
