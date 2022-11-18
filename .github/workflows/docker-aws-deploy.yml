@@ -35,5 +35,10 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key_path: "./ip_rsa_aws"
           port: 22
-          source: "aws-prod/traefik/traefik.yml,aws-prod/certs/crt.crt,aws-prod/certs/key.key"
+          source: "
+          aws-prod/traefik/traefik.yml,
+          aws-prod/.env,
+          aws-prod/docker-compose-prod.yml,
+          aws-prod/certs/crt.crt,
+          aws-prod/certs/key.key"
           target: "/opt/chaskiq-docker/"
