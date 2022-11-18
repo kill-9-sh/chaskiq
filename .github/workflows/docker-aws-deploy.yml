@@ -19,7 +19,7 @@ jobs:
           echo ${{ secrets.CRT_CRT }} | base64 -d > ./aws-prod/certs/crt.crt
           echo ${{ secrets.CRT_KEY }} | base64 -d > ./aws-prod/certs/key.key
           echo ${{ secrets.ENV_FILE }} | base64 -d > ./aws-prod/.env
-          echo ${{ secrets.SSH_PRIVATE_KEY }} > ./ip_rsa_aws
+          echo ${{ secrets.SSH_PRIVATE_KEY }} | base64 -d > ./ip_rsa_aws
           
       - name: Copy file to AWS
         # uses: garygrossgarten/github-action-scp@release
