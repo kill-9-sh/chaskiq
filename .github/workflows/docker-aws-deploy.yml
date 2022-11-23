@@ -42,3 +42,4 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       - run: ssh ${{ secrets.SSH_HOST }} pwd
+      #####
