@@ -1,6 +1,5 @@
 version: '2.4'
 
-
 x-network:
   &network
   restart: unless-stopped
@@ -12,7 +11,6 @@ x-backend:
   tty: true
   env_file:
     - .env
-
   depends_on:
     traefik:
       condition: service_healthy
@@ -21,23 +19,13 @@ services:
     <<: *backend
     <<: *network
     image: cience/go-chat:aws-prod-img
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-      args:
-        RUBY_VERSION: '2.7.5'
-        PG_MAJOR: '14'
-        NODE_MAJOR: '16'
-        YARN_VERSION: '1.13.0'
-        BUNDLER_VERSION: '2.3.15'
-        APP_ENV: 'production'
     #command: sleep infinity
     command: ./bin/docker-compose-web
     labels:
       - org.label-schema.group=rails
       - traefik.port=3000
       - traefik.enable=true
-      - "traefik.http.routers.chaskiq.rule=Host(`chaskiq.eteam.io`)"
+      - "traefik.http.routers.chaskiq.rule=Host(`go-chat.eteam.io`)"
       - "traefik.http.services.chaskiq.loadbalancer.server.port=3000"
       - "traefik.http.routers.chaskiq.tls=true"
     # ports:
@@ -57,10 +45,10 @@ services:
       interval: 1s
       timeout: 3s
       retries: 30
-    logging:            
-      driver: "json-file"    
-      options:          
-        max-size: "200k"    
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
         max-file: "10"
     command:
       #- "--log.level=DEBUG"
