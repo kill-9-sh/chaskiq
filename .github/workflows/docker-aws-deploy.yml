@@ -41,4 +41,4 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_KEY: "./ip_rsa_aws"
-      - run: ssh ${{ steps.ssh.outputs.SERVER }} pwd
+      - run: ssh ${{ secrets.SSH_HOST }} pwd
