@@ -40,5 +40,5 @@ jobs:
         with:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
-          SSH_KEY: "./ip_rsa_aws"
+          SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       - run: ssh ${{ secrets.SSH_HOST }} pwd
