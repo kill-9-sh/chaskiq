@@ -75,4 +75,4 @@ jobs:
           SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       - run: echo ${{ secrets.SSH_PRIVATE_KEY }} | base64 -d > ~/.ssh/id_rsa
       - run: chmod 600 ~/.ssh/id_rsa
-      - run: ssh ${{ secrets.SSH_HOST }} pwd
+      - run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} pwd
