@@ -67,7 +67,7 @@ jobs:
           docker push cience/go-chat:${{ github.ref_name }}
           echo "${{ github.ref_name }} deployed!"
 
-      - name: RUN deploy
-      - run: echo ${{ secrets.SSH_PRIVATE_KEY }} | base64 -d > ~/.ssh/id_rsa
-      - run: chmod 600 ~/.ssh/id_rsa
-      - run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} ~/deploy.sh
+      # - name: RUN deploy
+      # - run: echo ${{ secrets.SSH_PRIVATE_KEY }} | base64 -d > ~/.ssh/id_rsa
+      # - run: chmod 600 ~/.ssh/id_rsa
+      # - run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} ~/deploy.sh
